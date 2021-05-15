@@ -1,17 +1,16 @@
-:- module(database_service, [update_position/2, add_new_position/2, delete_position/1]).
+:- module(db_service, [update_position/2, add_new_position/2, delete_position/1]).
 :- use_module(db).
 
 
 update_position(Position, Attributes) :-
     delete_position(Position),
-    insert_position(Position, Attributes),
+    add_new_position(Position, Attributes),
 	commit.
 
 
-add_new_position(
-        Position, [English, Nationality, Engineer, CsAbsolvent, SoftwareEngKnowledge, 
-                   VisualStudioKnowledge, VersionControlKnowledge, ProgrammingSkill, CshKnowledge, Experience ]) :-
-	assertz(db:programmingSkill(Position,ProgrammingSkill)),
+add_new_position(Position, [English, Nationality, Engineer, CsAbsolvent, SoftwareEngKnowledge, 
+    VisualStudioKnowledge, VersionControlKnowledge, ProgrammingSkill, CshKnowledge, Experience]) :-
+    assertz(db:programmingSkill(Position,ProgrammingSkill)),
     assertz(db:cshKnowledge(Position, CshKnowledge)),
     assertz(db:experience(Position, Experience)),
     (
@@ -41,8 +40,9 @@ add_new_position(
     (
         VersionControlKnowledge == yes -> assertz(db:versionControlKnowledge(Position));
         true
-    ),
-	commit.
+    )
+	,commit
+    .
 
 delete_position(Position) :-
 	retractall(db:english(Position)),
@@ -59,7 +59,7 @@ delete_position(Position) :-
 
 
 commit :- 
-    tell('db_2.pl'),
+    tell('db_records.pl'),
     listing(db:english),
     listing(db:polishNationality),
     listing(db:engineer),
@@ -71,3 +71,4 @@ commit :-
     listing(db:cshKnowledge),
     listing(db:experience),
     told.
+

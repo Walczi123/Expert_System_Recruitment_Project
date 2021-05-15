@@ -1,3 +1,3 @@
 :- module(db, []).
 
-:- consult(db_2).
+:- consult(db_records).
