@@ -29,6 +29,42 @@ questionnaire :-
     nl,
     write('Questionnaire'), 
     nl,
+    check_PolishNationality,
+    check_SpeakingEnglish,
+    check_BachelorDegree,
+    check_SEabilities,
+    check_VSEnv,
+    check_VCSystem,
+    check_ProgrammingSkills,
+    check_CshKnowledge,
+    check_Experience,  
+    write('The end of questions.'), nl,
+    write('Computing anwser...'), nl,
     user_menu.
 
+check_PolishNationality :-
+    write('check polish nationality'), nl.
 
+check_SpeakingEnglish :-
+    write('check speaking english'), nl.
+
+check_BachelorDegree :-
+    write('check bachelor degree'), nl.
+
+check_SEabilities :-
+    write('check SE abilities'), nl.
+
+check_VSEnv  :-
+    write('check VS Env'), nl.
+
+check_VCSystem  :-
+    write('check VC system'), nl.
+
+check_ProgrammingSkills  :-
+    write('check programming skills'), nl.
+
+check_CshKnowledge  :-
+    write('check c# knowledge'), nl.
+
+check_Experience  :-
+    write('check experience'), nl.
