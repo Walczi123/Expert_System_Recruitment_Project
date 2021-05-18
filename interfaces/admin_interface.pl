@@ -1,6 +1,8 @@
 :- module(admin_interface, [admin_welcome/0]).
 
 :- use_module(interfaces/interface).
+:- use_module(interfaces/user_interface).
+:- use_module(database/db_service).
 
 admin_welcome :-
     nl,
@@ -32,10 +34,11 @@ create_menu :-
     nl,
     write('Creating new position...'), 
     nl,
-    % read_position(PositionName),
-    % read_answers(Answers),
+    write('Please name the new position'), nl,
+    read(PositionName),
+    check_all(Answers, Factors),
     confirm('Are you sure you want to create new position?','admin_menu'),
-    % create_position(PositionName, Answers),
+    add_new_position(PositionName, Factors),
     write('Position succesfuly created.'), nl,
     admin_menu.
 
@@ -43,20 +46,23 @@ update_menu :-
     nl,
     write('Updating position...'), 
     nl,
-    % read_position(PositionName),
-    % read_answers(Answers),
+    write('Please name of updating position'), nl,
+    read(PositionName),
+    check_all(Answers, Factors),
     confirm('Are you sure you want to update position?','admin_menu'),
-    % update_position(PositionName, Answers),
+    print_list(Factors),
+    update_position(PositionName, Factors),
     write('Position succesfuly updated.'), nl,
     admin_menu.
 
-delete_menu :-
+mdelete_menu :-
     nl,
     write('Deleting position...'), 
     nl,
-    % read_position(PositionName),
-    % read_answers(Answers),
+    write('Please name of deleting position'), nl,
+    read(PositionName),
+    check_all(Answers, Factors),
     confirm('Are you sure you want to delete the position?','admin_menu'),
-    % delete_position(PositionName, Answers),
+    delete_position(PositionName),
     write('Position succesfuly deleted.'), nl,
     admin_menu.
