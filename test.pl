@@ -140,3 +140,6 @@ get_experience_factor2(Value, NewValue, Factor) :-
 % test2(Value, New) :-
 %     New is Value + e,
 %     write(New).
+
+
+skil(We,)

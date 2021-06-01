@@ -7,7 +7,8 @@
     vsEnv_options/1,
     vcSystem_options/1,
     programmingSkills_options/1,
-    cshKnowledge_options/1
+    cshKnowledge_options/1,
+    experience_options/1
     ]).
 
 % yes/no section
@@ -22,3 +23,4 @@ vcSystem_options([yes, no]).
 % comples options
 programmingSkills_options([beginner(b), elementary(e), intermediate(int), upper-intermediate(upint), advanced(adv)]).
 cshKnowledge_options([beginner(b), elementary(e), intermediate(int), upper-intermediate(upint), advanced(adv)]).
+experience_options([intern(i), junior(j), mid(m), senior(s), architect(a)]).
