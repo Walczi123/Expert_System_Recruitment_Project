@@ -11,7 +11,6 @@ fuzzy_inference(Answers, FactorsResult) :-
     reverse(SortedFactorsPairs, FactorsResult).
 
 get_factor([ AnswerPN,  AnswerSE,  AnswerBD, AnswerCSD,  AnswerSEA,  AnswerVSE,  AnswerVCS,  AnswerPS,  AnswerCSH,  AnswerE], Position, Factor) :-
-    write(Position),
     get_PN_factor(AnswerPN, Position, PNFactor),
     get_SE_factor(AnswerSE, Position, SEFactor),
     get_BD_factor(AnswerBD, Position, BDFactor),
@@ -19,9 +18,9 @@ get_factor([ AnswerPN,  AnswerSE,  AnswerBD, AnswerCSD,  AnswerSEA,  AnswerVSE, 
     get_SEA_factor(AnswerSEA, Position, SEAFactor),
     get_VSE_factor(AnswerVSE, Position, VSEFactor),
     get_VCS_factor(AnswerVCS, Position, VCSFactor),
-    % get_PS_factor(AnswerPS, Position, PSFactor),
-    % get_CSH_factor(AnswerCSH, Position, CSHFactor),
-    % get_E_factor(AnswerE, Position, EFactor),
+    get_PS_factor(AnswerPS, Position, PSFactor),
+    get_CSH_factor(AnswerCSH, Position, CSHFactor),
+    get_E_factor(AnswerE, Position, EFactor),
     FuzzyFactors = [
         PNFactor,
         SEFactor,
@@ -29,10 +28,10 @@ get_factor([ AnswerPN,  AnswerSE,  AnswerBD, AnswerCSD,  AnswerSEA,  AnswerVSE, 
         CSDFactor,
         SEAFactor,
         VSEFactor,
-        VCSFactor
-        % PSFactor,
-        % CSHFactor,
-        % EFactor
+        VCSFactor,
+        PSFactor,
+        CSHFactor,
+        EFactor
     ],
     list_sum(FuzzyFactors, SumFuzzyFactors),
     Factor is SumFuzzyFactors / 10,
@@ -61,20 +60,20 @@ get_VSE_factor(Answer, Position, Factor) :-
 get_VCS_factor(Answer, Position, Factor) :-
     map_VCS_factor(Answer, Position, Factor).
 
-% get_PS_factor(Answer, Position, Factor) :-
-%     map_skill_factor(Answer, Factor),
-%     distance_to_center_factor(Hotel, CenterFactor),
-%     Factor is 1 - abs(TargetFactor - CenterFactor).
+get_PS_factor(Answer, Position, Factor) :-
+    map_skill_factor(Answer, Factor1),
+    skill_factor(Position, Factor2),
+    Factor is 1 - abs(Factor1 - Factor2).
 
-% get_CSH_factor(Answer, Position, Factor) :-
-%     map_skill_factor(Answer, Factor1),
-%     distance_to_beach_factor(Hotel, BeachFactor),
-%     Factor is 1 - abs(TargetFactor - BeachFactor).
+get_CSH_factor(Answer, Position, Factor) :-
+    map_skill_factor(Answer, Factor1),
+    skill2_factor(Position, Factor2),
+    Factor is 1 - abs(Factor1 - Factor2).
 
-% get_E_factor(Answer, Position, Factor) :-
-%     map_exp_factor(Answer, Factor1),
-%     distance_to_center_factor(Hotel, Factor2),
-%     Factor is 1 - abs(Factor1 - Factor2).
+get_E_factor(Answer, Position, Factor) :-
+    map_exp_factor(Answer, Factor1),
+    exp_factor(Position, Factor2),
+    Factor is 1 - abs(Factor1 - Factor2).
 
 
 

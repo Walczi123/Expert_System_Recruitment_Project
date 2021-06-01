@@ -8,7 +8,10 @@
         map_VSE_factor/3,
         map_VCS_factor/3,
         map_exp_factor/2,
-        map_skill_factor/2
+        map_skill_factor/2,
+        exp_factor/2,
+        skill_factor/2,
+        skill2_factor/2
 	]).
 
 map_PN_factor(Answer, Position, Factor) :-
@@ -200,19 +203,186 @@ map_skill_factor(Answer, Factor) :-
         Answer == adv -> Factor is 0.9
     ).
 
-% skill_factor(Position, Factor) :-
-%     one_skill(Hotel, SmallFactor),
-%     medium_hotel_size(Hotel, MediumFactor),
-%     big_hotel_size(Hotel, BigFactor),
-%     map_hotel_size_to_factor(small, SmallMappedFactor),
-%     map_hotel_size_to_factor(medium, MediumMappedFactor),
-%     map_hotel_size_to_factor(big, BigMappedFactor),
-%     sharpen(
-%         [SmallFactor, MediumFactor, BigFactor],
-%         [SmallMappedFactor, MediumMappedFactor, BigMappedFactor],
-%         Factor
-%     ).
+skill_factor(Position, Factor) :-
+    one_skill(Position, O),
+    two_skill(Position, T),
+    three_skill(Position, TH),
+    four_skill(Position, F),
+    five_skill(Position, FI),
+    map_skill_factor(b, O2),
+    map_skill_factor(e, T2),
+    map_skill_factor(int, TH2),
+    map_skill_factor(upint, F2),
+    map_skill_factor(adv, FI2),
+    defuzzy(
+        [O, T, TH, F, FI],
+        [O2,T2,TH2,F2,FI2],
+        Factor
+    ).
 
+skill2_factor(Position, Factor) :-
+    one_skill2(Position, O),
+    two_skill2(Position, T),
+    three_skill2(Position, TH),
+    four_skill2(Position, F),
+    five_skill2(Position, FI),
+    map_skill_factor(b, O2),
+    map_skill_factor(e, T2),
+    map_skill_factor(int, TH2),
+    map_skill_factor(upint, F2),
+    map_skill_factor(adv, FI2),
+    defuzzy(
+        [O, T, TH, F, FI],
+        [O2,T2,TH2,F2,FI2],
+        Factor
+    ).
+
+exp_factor(Position, Factor) :-
+    one_exp(Position, O),
+    two_exp(Hotel, T),
+    three_exp(Hotel, TH),
+    four_exp(Hotel, F),
+    five_exp(Hotel, FI),
+    map_exp_factor(i, O2),
+    map_exp_factor(j, T2),
+    map_exp_factor(m, TH2),
+    map_exp_factor(s, F2),
+    map_exp_factor(a, FI2),
+    defuzzy(
+        [O, T, TH, F, FI],
+        [O2,T2,TH2,F2,FI2],
+        Factor
+    ).
+
+one_skill(Position, Factor) :-
+    db:programmingSkill(Position, Value),
+    (
+        number(Value), Value =:=0 -> Factor is 0;
+        number(Value), Value =< 10 -> Factor is Value/10 ;
+        number(Value), Value =< 15 -> Factor is 1 ;
+        number(Value), Value =< 22.5 -> Factor is (22.5-Value)/7.5 ;
+        number(Value), Value >= 10 -> Factor is 0
+    ).
+
+two_skill(Position, Factor) :-
+    db:programmingSkill(Position, Value),
+    (
+        number(Value), Value =< 17.5 -> Factor is 0;
+        number(Value), Value =< 30 -> Factor is (Value - 17.5)/12.5 ;
+        number(Value), Value =< 35 -> Factor is 1 ;
+        number(Value), Value =< 45 -> Factor is (45-Value)/10 ;
+        number(Value), Value > 45 -> Factor is 0
+    ).
+
+three_skill(Position, Factor) :-
+    db:programmingSkill(Position, Value),
+    (
+        number(Value), Value =< 40 -> Factor is 0 ;
+        number(Value), Value =< 50 -> Factor is (Value - 40)/10 ;
+        number(Value), Value =< 60.5 -> Factor is 1 ;
+        number(Value), Value =< 70 -> Factor is (70-Value)/9.5 ;
+        number(Value), Value > 70 -> Factor is 0
+    ).
+
+four_skill(Position, Factor) :-
+    db:programmingSkill(Position, Value),
+    (
+        number(Value), Value =< 67.5 -> Factor is 0 ;
+        number(Value), Value =< 75 -> Factor is (Value - 67.5)/7.5 ;
+        number(Value), Value =< 85.5 -> Factor is 1 ;
+        number(Value), Value =< 93 -> Factor is (93-Value)/7.5 ;
+        number(Value), Value > 93 -> Factor is 0
+    ).
+
+five_skill(Position, Factor) :-
+    db:programmingSkill(Position, Value),
+    (
+        number(Value), Value =< 40 -> Factor is 0 ;
+        number(Value), Value =< 50 -> Factor is (Value - 40)/10 ;
+        number(Value), Value =< 60.5 -> Factor is 1 ;
+        number(Value), Value =< 70 -> Factor is (70-Value)/9.5 ;
+        number(Value), Value > 70 -> Factor is 0
+    ).
+
+one_skill2(Position, Factor) :-
+    db:cshKnowledge(Position, Value),
+    (
+        number(Value), Value =:=0 -> Factor is 0 ;
+        number(Value), Value =< 10 -> Factor is Value/10 ;
+        number(Value), Value =< 15 -> Factor is 1 ;
+        number(Value), Value =< 22.5 -> Factor is (22.5-Value)/7.5 ;
+        number(Value), Value >= 10 -> Factor is 0
+    ).
+
+two_skill2(Position, Factor) :-
+    db:cshKnowledge(Position, Value),
+    (
+        number(Value), Value =< 17.5 -> Factor is 0 ;
+        number(Value), Value =< 30 -> Factor is (Value - 17.5)/12.5 ;
+        number(Value), Value =< 35 -> Factor is 1 ;
+        number(Value), Value =< 45 -> Factor is (45-Value)/10 ;
+        number(Value), Value > 45 -> Factor is 0
+    ).
+
+three_skill2(Position, Factor) :-
+    db:cshKnowledge(Position, Value),
+    (
+        number(Value), Value =< 40 -> Factor is 0 ;
+        number(Value), Value =< 50 -> Factor is (Value - 40)/10 ;
+        number(Value), Value =< 60.5 -> Factor is 1 ;
+        number(Value), Value =< 70 -> Factor is (70-Value)/9.5 ;
+        number(Value), Value > 70 -> Factor is 0
+    ).
+
+four_skill2(Position, Factor) :-
+    db:cshKnowledge(Position, Value),
+    (
+        number(Value), Value =< 67.5 -> Factor is 0 ;
+        number(Value), Value =< 75 -> Factor is (Value - 67.5)/7.5 ;
+        number(Value), Value =< 85.5 -> Factor is 1 ;
+        number(Value), Value =< 93 -> Factor is (93-Value)/7.5 ;
+        number(Value), Value > 93 -> Factor is 0
+    ).
+
+five_skill2(Position, Factor) :-
+    db:cshKnowledge(Position, Value),
+    (
+        number(Value), Value =< 40 -> Factor is 0 ;
+        number(Value), Value =< 50 -> Factor is (Value - 40)/10 ;
+        number(Value), Value =< 60.5 -> Factor is 1 ;
+        number(Value), Value =< 70 -> Factor is (70-Value)/9.5 ;
+        number(Value), Value > 70 -> Factor is 0
+    ).
+
+one_exp(Position, Factor) :-
+    db:experience(Position, Value),
+    (
+        number(Value), Factor is 1/(1+abs(Value/5)**5)
+    ).
+
+two_exp(Position, Factor) :-
+    db:experience(Position, Value),
+    (
+    number(Value), Factor is e**((-1/2)*((Value - 23.5)/5.5)**2)
+    ).
+
+three_exp(Position, Factor) :-
+    db:experience(Position, Value),
+    (
+    number(Value), Factor is e**((-1/2)*((Value - 41.5)/5.5)**2)
+    ).
+
+four_exp(Position, Factor) :-
+    db:experience(Position, Value),
+    (
+    number(Value), Factor is e**((-1/2)*((Value - 63.5)/5.5)**2)
+    ).
+
+five_exp(Position, Factor) :-
+    db:experience(Position, Value),
+    (
+    number(Value), Factor is 1/(1+abs((Value-122.5)/30)**6)
+    ).
 
 
 defuzzy(Factors, FactorValues, Result) :-
@@ -231,5 +401,5 @@ list_sum([H|T], Sum) :-
 list_sum_2([], [], 0).
 list_sum_2([H_L|T_L], [H_R|T_R], P) :- 
     list_sum_2(T_L, T_R, R), 
-    Product is (H_L * H_R) + R.
+    P is (H_L * H_R) + R.
 
