@@ -34,18 +34,22 @@ questionnaire :-
     write('Computing anwser...'), nl,
     user_menu.
 
+% [English, Nationality, Engineer, CsAbsolvent, SoftwareEngKnowledge, 
+%     VisualStudioKnowledge, VersionControlKnowledge, ProgrammingSkill, CshKnowledge, Experience]
+
 check_all(Answers, Factors) :-
     check_PolishNationality( AnwserPN, FactorPN), nl,
     check_SpeakingEnglish(AnwserSE, FactorSE), nl,
     check_BachelorDegree(AnwserBD, FactorBD), nl,
+    check_ComputerScienceDegree(AnwserCSD, FactorCSD), nl,
     check_SEabilities(AnwserSEA, FactorSEA), nl,
     check_VSEnv(AnwserVSE, FactorVSE), nl,
     check_VCSystem(AnwserVCS, FactorVCS), nl,
     check_ProgrammingSkills(AnwserPS, FactorPS), nl,
     check_CshKnowledge(AnwserCSH, FactorCSH), nl,
     check_Experience(AnwserE, FactorE), nl,
-    Answers = [AnwserPN, AnwserSE, AnwserBD, AnwserSEA, AnwserVSE, AnwserVCS, AnwserPS, AnwserCSH, AnwserE],
-    Factors = [FactorPN, FactorSE, FactorBD, FactorSEA, FactorVSE, FactorVCS, FactorPS, FactorCSH, FactorE].
+    Answers = [AnwserSE, AnwserPN, AnwserBD, AnwserCSD, AnwserSEA, AnwserVSE, AnwserVCS, AnwserPS, AnwserCSH, AnwserE],
+    Factors = [FactorSE, FactorPN, FactorBD, FactorCSD, FactorSEA, FactorVSE, FactorVCS, FactorPS, FactorCSH, FactorE].
 
 check_PolishNationality(NewValue, Factor) :-
     write('Is the candidate of Polish nationality?'), nl,
@@ -56,7 +60,7 @@ check_PolishNationality(NewValue, Factor) :-
     get_polishNationality_factor(Anwser, NewValue, Factor).
 
 check_SpeakingEnglish(NewValue, Factor) :-
-    write('Can the candidate speak in English?'), nl,
+    write('Can the candidate speak English?'), nl,
     write('Options: '),
     speakingEnglish_options(Options),
     print_list(Options),
@@ -70,6 +74,14 @@ check_BachelorDegree(NewValue, Factor) :-
     print_list(Options),
     read(Anwser),
     get_bachelorDegree_factor(Anwser, NewValue, Factor).
+
+check_ComputerScienceDegree(NewValue, Factor) :-
+    write('Does the candidate have a bachelor\'s degree in computer science?'), nl,
+    write('Options: '),
+    computerScienceDegree_options(Options),
+    print_list(Options),
+    read(Anwser),
+    get_ComputerScienceDegree_factor(Anwser, NewValue, Factor).
 
 check_SEabilities(NewValue, Factor) :-
     write('Does the candidate know the fundamentals of software engineering?'), nl,    

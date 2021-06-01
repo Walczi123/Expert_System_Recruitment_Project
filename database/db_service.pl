@@ -2,6 +2,9 @@
 
 :- use_module(database/db).
 
+% :- use_module(db).
+
+
 update_position(Position, Attributes) :-
     delete_position(Position),
     add_new_position(Position, Attributes),
@@ -12,34 +15,13 @@ add_new_position(Position, [English, Nationality, Engineer, CsAbsolvent, Softwar
     assertz(db:programmingSkill(Position,ProgrammingSkill)),
     assertz(db:cshKnowledge(Position, CshKnowledge)),
     assertz(db:experience(Position, Experience)),
-    (
-        English == 1 -> assertz(db:english(Position));
-        true
-    ),
-    (
-        Nationality == 1 -> assertz(db:polishNationality(Position));
-        true
-    ),
-    (
-        CsAbsolvent == 1 -> assertz(db:csAbsolvent(Position));
-        true
-    ),
-	(
-        Engineer == 1 -> assertz(db:engineer(Position));
-        true
-    ),
-    (
-        SoftwareEngKnowledge == 1 -> assertz(db:softwareEngKnowledge(Position));
-        true
-    ),
-    (
-        VisualStudioKnowledge == 1 -> assertz(db:visualStudioKnowledge(Position));
-        true
-    ),
-    (
-        VersionControlKnowledge == 1 -> assertz(db:versionControlKnowledge(Position));
-        true
-    ),
+    ( English = 1 -> assertz(db:english(Position));     true),
+    ( Nationality = 1 -> assertz(db:polishNationality(Position));   true),
+    ( CsAbsolvent = 1 -> assertz(db:csAbsolvent(Position));   true),
+	( Engineer = 1 -> assertz(db:engineer(Position));   true),
+    ( SoftwareEngKnowledge = 1 -> assertz(db:softwareEngKnowledge(Position));   true),
+    ( VisualStudioKnowledge = 1 -> assertz(db:visualStudioKnowledge(Position));     true),
+    ( VersionControlKnowledge = 1 -> assertz(db:versionControlKnowledge(Position));  true),
 	commit.
 
 delete_position(Position) :-
@@ -57,7 +39,7 @@ delete_position(Position) :-
 
 
 commit :- 
-    tell('db_records.pl'),
+    tell('database/db_records.pl'),
     listing(db:english),
     listing(db:polishNationality),
     listing(db:engineer),

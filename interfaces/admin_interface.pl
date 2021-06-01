@@ -50,18 +50,17 @@ update_menu :-
     read(PositionName),
     check_all(Answers, Factors),
     confirm('Are you sure you want to update position?','admin_menu'),
-    print_list(Factors),
+    % print_list(Factors),
     update_position(PositionName, Factors),
     write('Position succesfuly updated.'), nl,
     admin_menu.
 
-mdelete_menu :-
+delete_menu :-
     nl,
     write('Deleting position...'), 
     nl,
     write('Please name of deleting position'), nl,
     read(PositionName),
-    check_all(Answers, Factors),
     confirm('Are you sure you want to delete the position?','admin_menu'),
     delete_position(PositionName),
     write('Position succesfuly deleted.'), nl,
