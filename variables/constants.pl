@@ -2,6 +2,7 @@
     polishNationality_options/1,
     speakingEnglish_options/1,
     bachelorDegree_options/1,
+    computerScienceDegree_options/1,
     seAblities_options/1,
     vsEnv_options/1,
     vcSystem_options/1,
@@ -13,6 +14,7 @@
 polishNationality_options([yes, no]).
 speakingEnglish_options([yes, no]).
 bachelorDegree_options([yes, no]).
+computerScienceDegree_options([yes, no]).
 seAblities_options([yes, no]).
 vsEnv_options([yes, no]).
 vcSystem_options([yes, no]).

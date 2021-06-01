@@ -4,6 +4,7 @@
     get_polishNationality_factor/3,
     get_speakingEnglish_factor/3,
     get_bachelorDegree_factor/3,
+    get_ComputerScienceDegree_factor/3,
     get_seAblities_factor/3,
     get_vsEnv_factor/3,
     get_vcSystem_factor/3,
@@ -33,6 +34,10 @@ get_speakingEnglish_factor(Value, NewValue, Factor) :-
     Factor = F.
 
 get_bachelorDegree_factor(Value, NewValue, Factor) :-
+    get_yesno_factor(Value, NewValue, F),
+    Factor = F.
+
+get_ComputerScienceDegree_factor(Value, NewValue, Factor) :-
     get_yesno_factor(Value, NewValue, F),
     Factor = F.
 
