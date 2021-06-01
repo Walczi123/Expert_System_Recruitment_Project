@@ -239,10 +239,10 @@ skill2_factor(Position, Factor) :-
 
 exp_factor(Position, Factor) :-
     one_exp(Position, O),
-    two_exp(Hotel, T),
-    three_exp(Hotel, TH),
-    four_exp(Hotel, F),
-    five_exp(Hotel, FI),
+    two_exp(Position, T),
+    three_exp(Position, TH),
+    four_exp(Position, F),
+    five_exp(Position, FI),
     map_exp_factor(i, O2),
     map_exp_factor(j, T2),
     map_exp_factor(m, TH2),
