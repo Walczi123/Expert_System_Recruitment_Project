@@ -4,6 +4,7 @@
 :- use_module(variables/constants).
 :- use_module(variables/factors).
 :- use_module(common_functions/print_functions).
+:- use_module(fuzzy/fuzzy).
 :- use_module(production_rules).
 
 user_welcome:-
@@ -33,6 +34,8 @@ questionnaire :-
     check_all(Ans, Fac), nl,
     write('The end of questions.'), nl,
     write('Computing anwser...'), nl,
+    fuzzy_inference(Ans, Result),
+    show_result(Result),
     get_recommendation(Fac), nl,
     user_menu.
 
@@ -126,6 +129,20 @@ check_CshKnowledge(NewValue, Factor) :-
     get_cshKnowledge_factor(Anwser, NewValue, Factor).
 
 check_Experience(NewValue, Factor) :-
-    write('Specify experience in years'), nl,
+    write('Specify experience'), nl,
+    experience_options(Options),
+    print_list(Options),
     read(Anwser),
     get_experience_factor(Anwser, NewValue, Factor).
+
+show_result([]) :- 
+	format('~n').
+
+show_result([H|T]) :-
+	get_results(H, Factor, Position),
+	P is Factor * 100,
+	format('~2f% ~w ~n', [P, Position]),
+	show_result(T).
+
+get_results(Pair, O, T) :-
+	pairs_keys_values([Pair], [O], [T]).

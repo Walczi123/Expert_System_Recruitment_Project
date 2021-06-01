@@ -87,12 +87,17 @@ get_cshKnowledge_factor(Value, NewValue, Factor) :-
 
 get_experience_factor(Value, NewValue, Factor) :-
     (
-        number(Value), Value < 1 -> Factor is 0.3, NewValue = Value;
-        number(Value), Value >= 1, Value < 3 -> Factor is 0.4, NewValue = Value;
-        number(Value), Value >= 3, Value < 7 -> Factor is 0.5, NewValue = Value;
-        number(Value), Value >= 7, Value < 12 -> Factor is 0.85, NewValue = Value;
-        number(Value), Value > 12 -> Factor is 1, NewValue = Value;
-        nl, write('Specify experience in years'), nl,
+        Value == intern -> Factor is 0.3, NewValue = 'intern';
+        Value == i -> Factor is 0.3, NewValue = 'intern';
+        Value == junior -> Factor is 0.4, NewValue = 'junior';
+        Value == j -> Factor is 0.4, NewValue = 'junior';
+        Value == mid -> Factor is 0.5, NewValue = 'mid';
+        Value == m -> Factor is 0.5, NewValue = 'mid';
+        Value == senior -> Factor is 0.85, NewValue = 'senior';
+        Value == s -> Factor is 0.85, NewValue = 'senior'; 
+        Value == architect -> Factor is 1, NewValue = 'architect';
+        Value == a -> Factor is 1, NewValue = 'architect';
+        nl, write('Specify experience'), nl,
         read(V),
         get_experience_factor(V, NewValue, Factor)
     ).
