@@ -73,16 +73,16 @@ versionControlKnowledge(midFrontendDev).
 
 :- dynamic programmingSkill/2.
 
-programmingSkill(webDev, 0.5).
-programmingSkill(juniorFrontendDev, 0.3).
-programmingSkill(midFrontendDev, 0.5).
-programmingSkill(seniorFrontentDev, 0.9).
-programmingSkill(juniorBackednDev, 0.3).
-programmingSkill(midBackendDev, 0.5).
-programmingSkill(seniorBackendDev, 0.9).
-programmingSkill(projectManager, 0.1).
-programmingSkill(fullstackDev, 0.9).
-programmingSkill(tester, 0.3).
+programmingSkill(webDev, 50).
+programmingSkill(juniorFrontendDev, 30).
+programmingSkill(midFrontendDev, 50).
+programmingSkill(seniorFrontentDev, 90).
+programmingSkill(juniorBackednDev, 30).
+programmingSkill(midBackendDev, 50).
+programmingSkill(seniorBackendDev, 90).
+programmingSkill(projectManager, 10).
+programmingSkill(fullstackDev, 90).
+programmingSkill(tester, 30).
 programmingSkill(secretary, 0).
 
 :- dynamic cshKnowledge/2.
@@ -91,25 +91,25 @@ cshKnowledge(webDev, 0).
 cshKnowledge(juniorFrontendDev, 0).
 cshKnowledge(midFrontendDev, 0).
 cshKnowledge(seniorFrontentDev, 0).
-cshKnowledge(juniorBackednDev, 0.3).
-cshKnowledge(midBackendDev, 0.5).
-cshKnowledge(seniorBackendDev, 0.7).
+cshKnowledge(juniorBackednDev, 30).
+cshKnowledge(midBackendDev, 50).
+cshKnowledge(seniorBackendDev, 70).
 cshKnowledge(projectManager, 0).
-cshKnowledge(fullstackDev, 0.5).
+cshKnowledge(fullstackDev, 50).
 cshKnowledge(tester, 0).
 cshKnowledge(secretary, 0).
 
 :- dynamic experience/2.
 
-experience(webDev, 0.4).
-experience(juniorFrontendDev, 0.3).
-experience(midFrontendDev, 0.4).
-experience(seniorFrontentDev, 0.5).
-experience(juniorBackednDev, 0.3).
-experience(midBackendDev, 0.4).
-experience(seniorBackendDev, 0.5).
-experience(projectManager, 0.85).
-experience(fullstackDev, 0.85).
-experience(tester, 0.4).
-experience(secretary, 0.4).
+experience(webDev, 40).
+experience(juniorFrontendDev, 30).
+experience(midFrontendDev, 40).
+experience(seniorFrontentDev, 50).
+experience(juniorBackednDev, 30).
+experience(midBackendDev, 40).
+experience(seniorBackendDev, 50).
+experience(projectManager, 85).
+experience(fullstackDev, 85).
+experience(tester, 40).
+experience(secretary, 40).
 
