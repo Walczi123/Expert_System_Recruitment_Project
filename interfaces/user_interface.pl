@@ -4,6 +4,7 @@
 :- use_module(variables/constants).
 :- use_module(variables/factors).
 :- use_module(common_functions/print_functions).
+:- use_module(production_rules).
 
 user_welcome:-
     nl,
@@ -29,9 +30,10 @@ user_menu :-
 
 
 questionnaire :-
-    check_all(Ans, Fac),
+    check_all(Ans, Fac), nl,
     write('The end of questions.'), nl,
     write('Computing anwser...'), nl,
+    get_recommendation(Fac), nl,
     user_menu.
 
 % [English, Nationality, Engineer, CsAbsolvent, SoftwareEngKnowledge, 

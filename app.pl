@@ -10,7 +10,7 @@
 
 main :-
     nl,
-    write('Welcome in recruitmen system'), 
+    write('Welcome in recruitment system'), 
     nl,
 
     % experience_options(Options),
