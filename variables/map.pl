@@ -114,26 +114,6 @@ yes_SEA(Position, Factor) :-
         Factor is 0
     ).
 
-map_SEA_factor(Answer, Position, Factor) :-
-	(
-        Answer == no ->  no_SEA(Position,Factor);
-        Answer == yes ->  yes_SEA(Position,Factor);
-        Answer == n ->  no_SEA(Position,Factor);
-		Answer == y ->  yes_SEA(Position,Factor)
-	).
-
-no_SEA(Position, Factor) :-
-    (
-        (db:softwareEngKnowledge(Position)) -> Factor is 0;
-        Factor is 1
-    ).
-
-yes_SEA(Position, Factor) :-
-    (
-        (db:softwareEngKnowledge(Position)) -> Factor is 1;
-        Factor is 0
-    ).
-
 map_VSE_factor(Answer, Position, Factor) :-
 	(
         Answer == no ->  no_VSE(Position,Factor);
@@ -197,7 +177,7 @@ map_skill_factor(Answer, Factor) :-
         Answer == e -> Factor is 0.3;
         Answer == intermediate -> Factor is 0.5;
         Answer == int -> Factor is 0.5;
-        Answer == upper-intermediate -> Factor is 0.7;
+        Answer == 'upper-intermediate' -> Factor is 0.7;
         Answer == upint -> Factor is 0.7;
         Answer == advanced -> Factor is 0.9;
         Answer == adv -> Factor is 0.9

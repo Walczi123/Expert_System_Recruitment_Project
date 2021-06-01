@@ -11,6 +11,7 @@ fuzzy_inference(Answers, FactorsResult) :-
     reverse(SortedFactorsPairs, FactorsResult).
 
 get_factor([ AnswerPN,  AnswerSE,  AnswerBD, AnswerCSD,  AnswerSEA,  AnswerVSE,  AnswerVCS,  AnswerPS,  AnswerCSH,  AnswerE], Position, Factor) :-
+    get_E_factor(AnswerE, Position, EFactor),
     get_PN_factor(AnswerPN, Position, PNFactor),
     get_SE_factor(AnswerSE, Position, SEFactor),
     get_BD_factor(AnswerBD, Position, BDFactor),
@@ -20,7 +21,6 @@ get_factor([ AnswerPN,  AnswerSE,  AnswerBD, AnswerCSD,  AnswerSEA,  AnswerVSE, 
     get_VCS_factor(AnswerVCS, Position, VCSFactor),
     get_PS_factor(AnswerPS, Position, PSFactor),
     get_CSH_factor(AnswerCSH, Position, CSHFactor),
-    get_E_factor(AnswerE, Position, EFactor),
     FuzzyFactors = [
         PNFactor,
         SEFactor,
