@@ -34,9 +34,9 @@ questionnaire :-
     check_all(Ans, Fac), nl,
     write('The end of questions.'), nl,
     write('Computing anwser...'), nl,
+    get_recommendation(Fac), nl,
     fuzzy_inference(Ans, Result),
     show_result(Result),
-    get_recommendation(Fac), nl,
     user_menu.
 
 % [English, Nationality, Engineer, CsAbsolvent, SoftwareEngKnowledge, 

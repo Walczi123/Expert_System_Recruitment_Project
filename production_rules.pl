@@ -2,7 +2,7 @@
 
 get_recommendation(Factors) :-
     nl,
-    write('Available positions:'),nl,
+    write('Suggested positions:'),nl,
     recommend_webDev(Factors, Ans1),
     recommend_juniorFrontendDev(Factors, Ans2),
     recommend_midFrontendDev(Factors, Ans3),
