@@ -15,18 +15,17 @@ get_recommendation(Factors) :-
     recommend_tester(Factors, Ans10),
     recommend_secretary(Factors, Ans11),
 
-    (Ans1 == 1 -> write('WebDev'), nl),
-    (Ans2 == 1 -> write('JuniorFrontendDev'), nl),
-    (Ans3 == 1 -> write('MidFrontendDev'), nl),
-    (Ans4 == 1 -> write('SeniorFrontendDev'), nl),
-    (Ans5 == 1 -> write('JuniorBackendDev'), nl),
-    (Ans6 == 1 -> write('MidBackendDev'), nl),
-    (Ans7 == 1 -> write('SeniorBackendDev'), nl),
-    (Ans8 == 1 -> write('ProjectManager'), nl),
-    (Ans9 == 1 -> write('FullstackDev'), nl),
-    (Ans10 == 1 -> write('Tester'), nl),
-    (Ans11 == 1 -> write('Secretary'), nl)
-    .
+    (Ans1 == 1 -> write('WebDev'), nl ; write('')),
+    (Ans2 == 1 -> write('JuniorFrontendDev'), nl ; write('')),
+    (Ans3 == 1 -> write('MidFrontendDev'), nl ; write('')),
+    (Ans4 == 1 -> write('SeniorFrontendDev'), nl ; write('')),
+    (Ans5 == 1 -> write('JuniorBackendDev'), nl ; write('')),
+    (Ans6 == 1 -> write('MidBackendDev'), nl ; write('')),
+    (Ans7 == 1 -> write('SeniorBackendDev'), nl ; write('')),
+    (Ans8 == 1 -> write('ProjectManager'), nl ; write('')),
+    (Ans9 == 1 -> write('FullstackDev'), nl ; write('')),
+    (Ans10 == 1 -> write('Tester'), nl ; write('')),
+    (Ans11 == 1 -> write('Secretary'), nl ; write('')).
 
 
 recommend_webDev([En, Pl, Eng, CS, SE, VS, VC, Pro, Csh, Exp], Ans) :- 
